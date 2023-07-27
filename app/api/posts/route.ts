@@ -1,4 +1,4 @@
-import prisma from "@/prisma";
+import { prisma } from "@/prisma";
 import { NextResponse } from "next/server";
 
 export async function main() {
@@ -13,11 +13,11 @@ export const GET = async (req: Request, res: NextResponse) => {
   try {
     await main();
     const posts = await prisma.post.findMany({
-        include: {
-          comments: true,
-        },
-      });
-  
+      include: {
+        comments: true,
+      },
+    });
+
     return NextResponse.json({ message: "Success", posts }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ message: "Error", error }, { status: 500 });
