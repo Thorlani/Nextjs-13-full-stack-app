@@ -11,12 +11,9 @@ type Post = {
 
 const Page = async () => {
   const getPosts = async () => {
-    const res = await fetch(
-      "https://nextjs-13-full-stack-app.vercel.app/api/posts",
-      {
-        next: { revalidate: 60 },
-      }
-    );
+    const res = await fetch(`${process.env.NEXT_API_URL + "posts"}`, {
+      next: { revalidate: 60 },
+    });
     const result = await res.json();
     return result;
   };
