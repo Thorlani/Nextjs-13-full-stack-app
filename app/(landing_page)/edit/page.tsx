@@ -22,16 +22,16 @@ const Edit = async () => {
         return (
           <div key={post.id} className="mb-8">
             <div>
-              <Link href={`/${post.id}`}>
-                <h1 className="text-3xl font-bold">{post.title}</h1>
-                <p className="text-gray-600">{post.description}</p>
-                <p className="text-gray-600">{post.date.slice(0, 10)}</p>
-              </Link>
+              <h1 className="text-3xl font-bold">{post.title}</h1>
+              <p className="text-gray-600">{post.description}</p>
+              <p className="text-gray-600">{post.date.slice(0, 10)}</p>
             </div>
             <div className="w-fit h-fit flex">
-              <button className="px-4 py-1 rounded-[12px] border-[1px] border-[#000] hover:bg-[#fff]">
-                Update
-              </button>
+              <Link href={`/edit/${post.id}`}>
+                <button className="px-4 py-1 rounded-[12px] border-[1px] border-[#000] hover:bg-[#fff]">
+                  Update
+                </button>
+              </Link>
               <Delete id={post.id} />
             </div>
           </div>

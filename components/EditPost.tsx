@@ -3,23 +3,31 @@ import { useState } from "react";
 import axios from "axios";
 import { InfinitySpin } from "react-loader-spinner";
 
-const AddComment = ({ id }: { id: string }) => {
-  const [comment, setComment] = useState({
-    name: "",
-    comment: "",
-  });
+const EditPost = ({
+  id,
+  title,
+  description,
+}: {
+  id: string;
+  title: string;
+  description: string;
+}) => {
   const [loader, setLoader] = useState(false);
+  const [postContent, setPostContent] = useState({
+    title: title,
+    description: description,
+  });
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setLoader(true);
-    if (comment.name === "" && comment.comment === "") {
+    if (postContent.title === "" && postContent.description === "") {
     } else {
       try {
         axios
-          .post(`${process.env.NEXT_PUBLIC_API_URL + "comments/" + id}`, {
-            comment: comment.comment,
-            name: comment.name,
+          .put(`${process.env.NEXT_PUBLIC_API_URL + "posts/" + id}`, {
+            title: postContent.title,
+            description: postContent.description,
           })
           .then((res) => {
             setLoader(false);
@@ -31,7 +39,6 @@ const AddComment = ({ id }: { id: string }) => {
       }
     }
   };
-
   return (
     <>
       {loader && (
@@ -44,13 +51,13 @@ const AddComment = ({ id }: { id: string }) => {
           <label htmlFor="name">Name</label>
           <input
             type="text"
-            className="w-[300px] md:w-[500px] h-[41px] indent-2 outline-none border-1px border-[#000]"
+            className="w-[300px] md:w-[700px] h-[41px] indent-2 outline-none border-1px border-[#000]"
             name="name"
-            value={comment.name}
+            value={postContent.title}
             onChange={(e) =>
-              setComment({
-                ...comment,
-                name: e.target.value,
+              setPostContent({
+                ...postContent,
+                title: e.target.value,
               })
             }
           />
@@ -58,13 +65,13 @@ const AddComment = ({ id }: { id: string }) => {
         <div className="flex flex-col gap-4">
           <label htmlFor="name">Comment</label>
           <textarea
-            className="w-[300px] md:w-[500px] h-[200px] p-2 outline-none border-1px border-[#000]"
+            className="w-[300px] md:w-[700px] h-[200px] md:h-[400px] p-2 outline-none border-1px border-[#000]"
             name="comment"
-            value={comment.comment}
+            value={postContent.description}
             onChange={(e) =>
-              setComment({
-                ...comment,
-                comment: e.target.value,
+              setPostContent({
+                ...postContent,
+                description: e.target.value,
               })
             }
           />
@@ -72,7 +79,7 @@ const AddComment = ({ id }: { id: string }) => {
         <button
           type="button"
           onClick={
-            comment.name === "" || comment.comment === ""
+            postContent.title === "" || postContent.description === ""
               ? () => {}
               : handleSubmit
           }
@@ -85,4 +92,4 @@ const AddComment = ({ id }: { id: string }) => {
   );
 };
 
-export default AddComment;
+export default EditPost;
