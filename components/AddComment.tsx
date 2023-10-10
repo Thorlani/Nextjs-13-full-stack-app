@@ -23,6 +23,11 @@ const AddComment = ({ id }: { id: string }) => {
           })
           .then((res) => {
             setLoader(false);
+            setComment({
+              ...comment,
+              name: "",
+              comment: "",
+            });
             window.location.reload();
           });
       } catch (error) {

@@ -31,6 +31,11 @@ const EditPost = ({
           })
           .then((res) => {
             setLoader(false);
+            setPostContent({
+              ...postContent,
+              title: "",
+              description: "",
+            });
             window.location.reload();
           });
       } catch (error) {

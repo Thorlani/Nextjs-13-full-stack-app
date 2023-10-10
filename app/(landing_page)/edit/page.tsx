@@ -32,7 +32,7 @@ const Edit = async () => {
                   Update
                 </button>
               </Link>
-              <Delete id={post.id} />
+              {/* <Delete id={post.id} /> */}
             </div>
           </div>
         );
