@@ -17,7 +17,7 @@ const AddComment = ({ id }: { id: string }) => {
     } else {
       try {
         axios
-          .post(`${process.env.NEXT_API_URL + "comments/" + id}`, {
+          .post(`${process.env.NEXT_PUBLIC_API_URL + "comments/" + id}`, {
             comment: comment.comment,
             name: comment.name,
           })
