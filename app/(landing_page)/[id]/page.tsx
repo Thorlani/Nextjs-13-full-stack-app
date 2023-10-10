@@ -4,7 +4,9 @@ const ReadPage = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
 
   const getPosts = async () => {
-    const res = await fetch(`${process.env.NEXT_API_URL + "posts/" + id}`);
+    const res = await fetch(`${process.env.NEXT_API_URL + "posts/" + id}`, {
+      next: { revalidate: 1000 },
+    });
     const result = await res.json();
     return result;
   };
